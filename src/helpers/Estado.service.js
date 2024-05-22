@@ -63,6 +63,21 @@ const ObtenerUnidades = async () => {
     }
 }
 
+const ObtenerFaltantes = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerDepartamentosFaltantes");
+        if (response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener el registro de las unidades', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el registro de las tablas:', error);
+        return null;
+    }
+}
+
 
 
 export default {    
@@ -70,4 +85,5 @@ export default {
     obtenerDepartamentos,
     obtenerTrabajos,
     ObtenerUnidades,
+    ObtenerFaltantes
 }

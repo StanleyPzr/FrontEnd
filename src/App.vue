@@ -10,18 +10,30 @@
             <router-link to="/" class="nav-link">Inicio</router-link>
           </b-nav-item>          
           <b-nav-item @click="toggleCollapse('func1')">
-            <span class="nav-link">Homologación</span>
+            <span class="nav-link"><strong>Homologación</strong></span>
           </b-nav-item>
           <b-collapse v-model="collapses.func1">
             <b-nav vertical>
               <b-nav-item>
-                <router-link to="/about" class="nav-link">Ver Registro de los cambios</router-link>
+                <router-link to="/archivos" class="nav-link">Archivos XML</router-link>
+              </b-nav-item>
+              <b-nav-item>
+                <router-link to="/agregar" class="nav-link">Agregar Datos</router-link>
+              </b-nav-item>
+              <b-nav-item>
+                <router-link to="/solicitudCambio" class="nav-link">Agregar/Editar tablas de la BD</router-link>
+              </b-nav-item>
+              <b-nav-item>
+                <router-link to="/about" class="nav-link">Registro de los cambios</router-link>
+              </b-nav-item>
+              <b-nav-item>
+                <router-link to="/faltantes" class="nav-link">Visualizar Errores</router-link>
               </b-nav-item>
               
             </b-nav>
           </b-collapse>
           <b-nav-item @click="toggleCollapse('func2')">
-            <span class="nav-link">Tablas</span>
+            <span class="nav-link"><strong>Tablas</strong></span>
           </b-nav-item>
           <b-collapse v-model="collapses.func2">
             <b-nav vertical>
@@ -31,9 +43,11 @@
               <b-nav-item>
                 <router-link to="/" class="nav-link white-text">Worker</router-link>
               </b-nav-item>
+              <b-nav-item>
+                <router-link to="/" class="nav-link white-text">Juegos de valores</router-link>
+              </b-nav-item>
             </b-nav>
-          </b-collapse>
-          <!-- Otras funcionalidades -->
+          </b-collapse>          
         </b-nav>
       </b-col>
       <b-col cols="9">
