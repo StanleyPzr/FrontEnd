@@ -41,7 +41,7 @@
     </template>
   </b-table>
  
-  <template #modal-footer="{ cancel, ok }">
+  <template #modal-footer="{ cancel }">
     <b-button variant="danger" @click="cancel">Cerrar</b-button>
   </template>
 </b-modal>

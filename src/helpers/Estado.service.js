@@ -78,6 +78,20 @@ const ObtenerFaltantes = async () => {
     }
 }
 
+const ObtenerModelosTabla = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/FrontEnd/models-structure");
+        if (response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener las tablas y sus modelos', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el registro de las tablas:', error);
+        return null;
+    }
+}
 
 
 export default {    
@@ -85,5 +99,6 @@ export default {
     obtenerDepartamentos,
     obtenerTrabajos,
     ObtenerUnidades,
-    ObtenerFaltantes
+    ObtenerFaltantes,
+    ObtenerModelosTabla
 }

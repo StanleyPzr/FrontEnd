@@ -1,6 +1,6 @@
 
 {
-"BASE_URL_SIS_API": "https://localhost:44310/api",
+"BASE_URL_SIS_API": "http://localhost:5110/api",
 "BASE_URL_FILES": "",
 "NOMBRE_SISTEMA": "Sistema Homologación",
 "APP_LOGIN_MODE": "DEFAULT"
