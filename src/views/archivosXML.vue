@@ -6,34 +6,35 @@
         <h4>Gestión de Archivos XML</h4>
       </b-card-header>
       <b-card-body>
-        <b-button class="mr-2" @click="showModal('select')">Seleccionar Archivo</b-button>
-        <b-button class="ml-2" @click="showModal('request')">Solicitar XML</b-button>
+        <div v-if="section === ''">
+          <b-button class="mr-2" @click="showSection('select')">Seleccionar Archivo</b-button>
+          <b-button class="ml-2" @click="showSection('request')">Solicitar XML</b-button>
+        </div>
+        <div v-else-if="section === 'select'">
+          <h5>Seleccionar Archivo</h5>
+          <b-list-group>
+            <b-list-group-item @click="handleSelect('Worker')" action>Worker</b-list-group-item>
+            <b-list-group-item @click="handleSelect('Structures')" action>Structures</b-list-group-item>
+            <b-list-group-item @click="handleSelect('Lookups')" action>Lookups</b-list-group-item>
+          </b-list-group>
+          <b-button class="mt-3" @click="showSection('')">Volver</b-button>
+        </div>
+        <div v-else-if="section === 'request'">
+          <h5>Solicitar XML</h5>
+          <p class="my-4">¿Solicitar nuevos archivos a HCM?</p>
+          <div class="d-flex justify-content-end">
+            <b-button class="ml-2" variant="success" @click="requestFiles('Sí')">Sí</b-button>
+            <b-button class="ml-2" variant="danger" @click="requestFiles('No')">No</b-button>
+          </div>
+          <b-button class="mt-3" @click="showSection('')">Volver</b-button>
+        </div>
+        <div v-else-if="section === 'info'">
+          <h5>Información del Archivo</h5>
+          <p class="my-4">{{ modalMessage }}</p>
+          <b-button class="mt-3" @click="showSection('')">Cerrar</b-button>
+        </div>
       </b-card-body>
     </b-card>
-
-    <!-- Modal Genérico -->
-    <b-modal id="generic-modal" ref="genericModal" :title="modalTitle" hide-footer>
-      <div v-if="modalType === 'select'">
-        <b-list-group>
-          <b-list-group-item @click="handleSelect('Worker')" action>Worker</b-list-group-item>
-          <b-list-group-item @click="handleSelect('Structures')" action>Structures</b-list-group-item>
-          <b-list-group-item @click="handleSelect('Lookups')" action>Lookups</b-list-group-item>
-        </b-list-group>
-      </div>
-      <div v-else-if="modalType === 'request'">
-        <p class="my-4">¿Solicitar nuevos archivos a HCM?</p>
-        <div class="d-flex justify-content-end">
-          <b-button class="ml-2" variant="success" @click="requestFiles('Sí')">Sí</b-button>
-          <b-button class="ml-2" variant="danger" @click="requestFiles('No')">No</b-button>
-        </div>
-      </div>
-      <div v-else-if="modalType === 'info'">
-        <p class="my-4">{{ modalMessage }}</p>
-        <div class="d-flex justify-content-end">
-          <b-button class="ml-2" variant="primary" @click="hideModal">Cerrar</b-button>
-        </div>
-      </div>
-    </b-modal>
   </div>
 </template>
 
@@ -41,29 +42,21 @@
 export default {
   data() {
     return {
-      modalTitle: '',
-      modalType: '',
+      section: '',
       modalMessage: ''
     };
   },
   methods: {
-    showModal(type) {
-      this.modalType = type;
-      this.modalTitle = type === 'select' ? 'Seleccionar Archivo' : 'Solicitud de Archivos';
-      this.$refs.genericModal.show();
-    },
-    hideModal() {
-      this.$refs.genericModal.hide();
+    showSection(type) {
+      this.section = type;
     },
     handleSelect(item) {
       this.modalMessage = `Traer información desde el servidor del archivo "${item}.xml"`;
-      this.modalType = 'info';
-      this.modalTitle = 'Información del Archivo';
+      this.section = 'info';
     },
     requestFiles(response) {
       this.modalMessage = `Solicitud de nuevos archivos a HCM: ${response}`;
-      this.modalType = 'info';
-      this.modalTitle = 'Resultado de la Solicitud';
+      this.section = 'info';
     }
   }
 };

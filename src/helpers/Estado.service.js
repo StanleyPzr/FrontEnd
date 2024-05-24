@@ -7,6 +7,7 @@ const obtenerRegistroCambios = async () => {
     try {
         const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerRegistroCambios");
         if (response.status === 200 && response.data) {
+            console.log(response.data)
             return response.data;
         } else {
             console.error('Error al obtener el registro de las tablas:', response.status);
@@ -80,7 +81,7 @@ const ObtenerFaltantes = async () => {
 
 const ObtenerModelosTabla = async () => {
     try {
-        const response = await axios.get(apiUrl + "/FrontEnd/models-structure");
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerTipoModelo");
         if (response.status === 200 && response.data) {
             return response.data;
         } else {
@@ -93,6 +94,20 @@ const ObtenerModelosTabla = async () => {
     }
 }
 
+const ObtenerErrores = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerErrores");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de errores', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el registro de errores: ', error)
+    }
+}
+
 
 export default {    
     obtenerRegistroCambios,
@@ -100,5 +115,6 @@ export default {
     obtenerTrabajos,
     ObtenerUnidades,
     ObtenerFaltantes,
-    ObtenerModelosTabla
+    ObtenerModelosTabla,
+    ObtenerErrores
 }

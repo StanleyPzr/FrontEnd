@@ -24,10 +24,10 @@
                 <router-link to="/solicitudCambio" class="nav-link">Agregar/Editar tablas de la BD</router-link>
               </b-nav-item>
               <b-nav-item>
-                <router-link to="/about" class="nav-link">Registro de los cambios</router-link>
+                <router-link to="/registrocambios" class="nav-link">Registro de los cambios</router-link>
               </b-nav-item>
               <b-nav-item>
-                <router-link to="/faltantes" class="nav-link">Visualizar Errores</router-link>
+                <router-link to="/errores" class="nav-link">Visualizar Errores</router-link>
               </b-nav-item>
               
             </b-nav>

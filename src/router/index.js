@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Tabs from '@/views/Tabs.vue'
-
 import Errores from '@/views/Errores.vue'
 import ArchivosXML from '@/views/archivosXML.vue'
 import AgregarDatos from '@/views/agregarDatos.vue'
 import Solicitudcambiotablas from '@/views/solicitudcambiotablas.vue'
+import RegistroCambios from '@/views/RegistroCambios.vue'
 
 Vue.use(VueRouter)
 
@@ -42,12 +42,9 @@ const routes = [
     component: Errores
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/registrocambios',
+    name: 'RegistroCambios',
+    component: RegistroCambios   
   }
   
 ]

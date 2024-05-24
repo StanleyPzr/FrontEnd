@@ -16,8 +16,6 @@
         aria-controls="mi-tabla"
       ></b-pagination>
     </b-tab>
-  
-
 </template>
 
 <script>
