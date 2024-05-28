@@ -76,9 +76,9 @@ export default {
       // Acciones para Funcionalidad 1 - Acción 1
     },
     accion2() {
-      // Acciones para Funcionalidad 1 - Acción 2
+   
     },
-    // Otros métodos de acción
+    
   },
 };
 </script>

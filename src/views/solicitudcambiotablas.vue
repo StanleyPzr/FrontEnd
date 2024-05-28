@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <h1 class="mb-4 text-center"><strong>Solicitudes de Tablas</strong></h1>
-    <b-card class="card-lg">
+    <b-card class="card-xl">
       <b-tabs>
         <b-tab title="Solicitud Crear Tabla">
           <b-form @submit.prevent="submitCrearTablaForm">
@@ -38,8 +38,23 @@
               :label="`Atributo${index + 1}`"
               class="mr-3"
             >
-              <b-form-input v-model="formData[column.name]" :placeholder="`Ingresar ${column.name}`"></b-form-input>
+              <div class="d-flex align-items-center">
+                <b-form-input v-model="formData[column.name]" :placeholder="`Ingresar ${column.name}`"></b-form-input>
+              </div>
             </b-form-group>
+            <div v-for="(newAttribute, index) in newAttributes" :key="'new-' + index" class="mr-3">
+              <b-form-group :label="`Nuevo atributo ${index + 1}`">
+                <div class="d-flex align-items-center">
+                  <b-form-input v-model="newAttribute.value" placeholder="Ingrese nuevo atributo"></b-form-input>
+                  <b-button variant="danger" size="sm" @click="removeNewAttribute(index)">
+                    <b-icon icon="trash"></b-icon>
+                  </b-button>
+                </div>
+              </b-form-group>
+            </div>            
+            <b-button variant="primary" size="sm" @click="addNewAttribute" class="my-2">
+              <b-icon icon="plus"></b-icon>
+            </b-button>            
             <div class="w-100 d-flex justify-content-end mt-2">
               <b-button variant="info" type="submit">Revisar Cambios</b-button>
             </div>
@@ -48,7 +63,7 @@
       </b-tabs>
     </b-card>
 
-    <!-- Modal de resumen de cambios -->
+    
     <b-modal v-model="showSummaryModal" title="Resumen de Cambios">
       <b-table :items="tableItems" :fields="tableFields" bordered>
         <template #cell(attribute)="data">
@@ -69,7 +84,7 @@
       </template>
     </b-modal>
 
-    <!-- Toast de notificación -->
+    
     <b-toast
       id="toast-success"
       variant="success"
@@ -79,6 +94,16 @@
       auto-hide-delay="5000"
     >
       Solicitud enviada correctamente.
+    </b-toast>
+    <b-toast
+      id="toast-warning"
+      variant="warning"
+      :visible="showWarningToast"
+      @hidden="showWarningToast = false"
+      solid
+      auto-hide-delay="5000"
+    >
+      Ocurrió un error.
     </b-toast>
   </div>
 </template>
@@ -93,9 +118,11 @@ export default {
       selectedModelProperties: [],
       formData: {},
       originalData: {},
+      newAttributes: [],
       showSummaryModal: false,
       filteredChanges: [],
       showToast: false,
+      showWarningToast: false,
       nombreTablaCrear: '',
       nombreAtributo: '',
       RelacionTabla: '',
@@ -128,10 +155,17 @@ export default {
       this.selectedModelProperties = this.modelsStructure[modelName];
       this.formData = {};
       this.originalData = {};
+      this.newAttributes = [];
       this.selectedModelProperties.forEach(property => {
         this.formData[property.name] = property.name;
-        this.originalData[property.name] = property.name; // Esto es solo un ejemplo, reemplázalo con los datos reales
+        this.originalData[property.name] = property.name;
       });
+    },
+    addNewAttribute() {
+      this.newAttributes.push({ value: '' });
+    },
+    removeNewAttribute(index) {
+      this.newAttributes.splice(index, 1);
     },
     openSummaryModal() {
       this.filteredChanges = [];
@@ -144,13 +178,30 @@ export default {
           });
         }
       }
+      this.newAttributes.forEach((newAttribute, index) => {
+        if (newAttribute.value) {
+          this.filteredChanges.push({
+            attribute: `Nuevo Atributo ${index + 1}`,
+            originalValue: '',
+            newValue: newAttribute.value
+          });
+        }
+      });
       this.tableItems = this.filteredChanges;
-      this.showSummaryModal = true;
+      if (this.filteredChanges.length > 0) {
+        this.showSummaryModal = true;
+      } else {
+        this.showWarningToast = true;
+      }
     },
     submitModifyForm() {
-      console.log('Formulario de Solicitud Modificar Tabla enviado', this.formData);
+      const finalData = {
+        ...this.formData,
+        newAttributes: this.newAttributes.filter(attr => attr.value).map(attr => attr.value)
+      };
+      console.log('Formulario de Solicitud Modificar Tabla enviado', finalData);
       this.showSummaryModal = false;
-      this.showToast = true; // Mostrar el toast de notificación
+      this.showToast = true; 
     }
   }
 };
@@ -165,12 +216,23 @@ export default {
 
 .card-lg {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px; 
+  max-height: 800px; 
+  overflow-y: auto; 
 }
 
-.b-form-group {
-  min-width: 200px;
-  flex: 1;
+
+.b-input-group-append {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+.input-group-append-content {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem; 
 }
 
 @media (max-width: 768px) {
