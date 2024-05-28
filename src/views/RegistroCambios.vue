@@ -83,7 +83,7 @@ export default {
   methods: {
     async ObtenerRegistroCambio() {
       try {
-        const response = await Estado.obtenerRegistroCambios();
+        const response = await Estado.ObtenerRegistroCambios();
         if (response && Array.isArray(response)) {
           this.registrosCambios = response;
         } else {

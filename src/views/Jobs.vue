@@ -57,7 +57,7 @@ mounted() {
 },
 methods: {
   async obtenerTrabajos() {
-    const data = await Estado.obtenerTrabajos();
+    const data = await Estado.ObtenerTrabajos();
     if (data) {
         console.log('Trabajos obtenidos:', data);
       this.jobs = data;

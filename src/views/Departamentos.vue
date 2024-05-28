@@ -77,7 +77,7 @@
     },
     methods: {
       async obtenerDepartamentos() {
-        const data = await Estado.obtenerDepartamentos();
+        const data = await Estado.ObtenerDepartamentos();
         if (data) {
           this.departamentos = data;
           this.totalDepartamentos = data.length;

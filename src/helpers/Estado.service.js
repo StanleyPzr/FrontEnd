@@ -3,7 +3,7 @@ import config from '@/../public/config.json';
 
 const apiUrl = config.BASE_URL_SIS_API;
 
-const obtenerRegistroCambios = async () => {
+const ObtenerRegistroCambios = async () => {
     try {
         const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerRegistroCambios");
         if (response.status === 200 && response.data) {
@@ -19,7 +19,7 @@ const obtenerRegistroCambios = async () => {
     }
 }
 
-const obtenerDepartamentos = async () => {
+const ObtenerDepartamentos = async () => {
     try {
         const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerDepartamentos");
         if (response.status === 200 && response.data) {
@@ -34,9 +34,9 @@ const obtenerDepartamentos = async () => {
     }
 }
 
-const obtenerTrabajos = async () => {
+const ObtenerTrabajos = async () => {
     try {
-        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerTrabajos");
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerJobs");
         if (response.status === 200 && response.data) {
             return response.data;
         } else {
@@ -64,7 +64,7 @@ const ObtenerUnidades = async () => {
     }
 }
 
-const ObtenerFaltantes = async () => {
+/* const ObtenerFaltantes = async () => {
     try {
         const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerDepartamentosFaltantes");
         if (response.status === 200 && response.data) {
@@ -77,7 +77,7 @@ const ObtenerFaltantes = async () => {
         console.error('Error al obtener el registro de las tablas:', error);
         return null;
     }
-}
+} */
 
 const ObtenerModelosTabla = async () => {
     try {
@@ -110,11 +110,11 @@ const ObtenerErrores = async () => {
 
 
 export default {    
-    obtenerRegistroCambios,
-    obtenerDepartamentos,
-    obtenerTrabajos,
+    ObtenerRegistroCambios,
+    ObtenerDepartamentos,
+    ObtenerTrabajos,
     ObtenerUnidades,
-    ObtenerFaltantes,
+    /* ObtenerFaltantes, */
     ObtenerModelosTabla,
     ObtenerErrores
 }
