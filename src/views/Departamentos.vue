@@ -1,5 +1,5 @@
 <template>     
-        <b-tab>
+        <div>
           <b-form-checkbox v-model="mostrarFilasSinDatos">Mostrar filas sin datos</b-form-checkbox>
           <b-table
             :items="departamentosFiltrados"
@@ -33,7 +33,7 @@
             :per-page="10"
             aria-controls="mi-tabla"
           ></b-pagination>
-        </b-tab>
+        </div>
       
    
   </template>

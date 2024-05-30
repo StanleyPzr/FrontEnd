@@ -7,6 +7,7 @@ import ArchivosXML from '@/views/archivosXML.vue'
 import AgregarDatos from '@/views/agregarDatos.vue'
 import Solicitudcambiotablas from '@/views/solicitudcambiotablas.vue'
 import RegistroCambios from '@/views/RegistroCambios.vue'
+import JuegosComunes from '@/views/JuegosComunesTab.vue'
 
 Vue.use(VueRouter)
 
@@ -45,7 +46,13 @@ const routes = [
     path: '/registrocambios',
     name: 'RegistroCambios',
     component: RegistroCambios   
-  }
+  },
+  {
+    path: '/juegosComunes',
+    name: 'JuegosComunes',
+    component: JuegosComunes  
+  },
+
   
 ]
 

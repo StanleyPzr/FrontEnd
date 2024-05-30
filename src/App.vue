@@ -44,7 +44,7 @@
                 <router-link to="/" class="nav-link white-text">Worker</router-link>
               </b-nav-item>
               <b-nav-item>
-                <router-link to="/" class="nav-link white-text">Juegos de valores</router-link>
+                <router-link to="/juegosComunes" class="nav-link white-text">Juegos Comunes</router-link>
               </b-nav-item>
             </b-nav>
           </b-collapse>          

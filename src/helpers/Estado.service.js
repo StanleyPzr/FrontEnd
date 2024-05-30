@@ -164,6 +164,20 @@ const ObtenerGrades = async () => {
     }
 }
 
+const ObtenerJuegosComunes = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerJuegosComunes/GetAllData");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de juegos comunes', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener los juegos comunes: ', error)
+    }
+}
+
 
 export default {    
     ObtenerRegistroCambios,
@@ -176,5 +190,6 @@ export default {
     ObtenerEntidades,
     ObtenerLocations,
     ObtenerPositions,
-    ObtenerGrades
+    ObtenerGrades,
+    ObtenerJuegosComunes
 }
