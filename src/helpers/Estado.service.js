@@ -51,7 +51,7 @@ const ObtenerTrabajos = async () => {
 
 const ObtenerUnidades = async () => {
     try {
-        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerUnidades");
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerUnidadesNegocio");
         if (response.status === 200 && response.data) {
             return response.data;
         } else {
@@ -108,6 +108,62 @@ const ObtenerErrores = async () => {
     }
 }
 
+const ObtenerEntidades = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerEntidades");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de entidades legales', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener las entidades legales: ', error)
+    }
+}
+
+const ObtenerLocations = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerLocations");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de localizaciones', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener las localizaciones: ', error)
+    }
+}
+
+const ObtenerPositions = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerPositions");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de posiciones', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener las posiciones: ', error)
+    }
+}
+
+const ObtenerGrades = async () => {
+    try {
+        const response = await axios.get(apiUrl + "/ControllerFrontEnd/ObtenerGrades");
+        if(response.status === 200 && response.data) {
+            return response.data;
+        } else {
+            console.error('Error al obtener la lista de grados', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener los grados: ', error)
+    }
+}
+
 
 export default {    
     ObtenerRegistroCambios,
@@ -116,5 +172,9 @@ export default {
     ObtenerUnidades,
     /* ObtenerFaltantes, */
     ObtenerModelosTabla,
-    ObtenerErrores
+    ObtenerErrores,
+    ObtenerEntidades,
+    ObtenerLocations,
+    ObtenerPositions,
+    ObtenerGrades
 }

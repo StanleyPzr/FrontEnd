@@ -2,7 +2,7 @@
     <b-tab>
       <b-form-checkbox v-model="mostrarFilasSinDatos">Mostrar filas sin datos</b-form-checkbox>
       <b-table
-        :items="unidadesFiltrados"
+        :items="entidadesFiltrados"
         :fields="camposTabla"
         striped
         hover
@@ -11,7 +11,7 @@
       </b-table>
       <b-pagination
         v-model="paginaActual"
-        :total-rows="totalUnidades"
+        :total-rows="totalEntidades"
         :per-page="10"
         aria-controls="mi-tabla"
       ></b-pagination>
@@ -26,44 +26,43 @@ import Estado from '@/helpers/Estado.service.js';
 export default {
 data() {
   return {
-    unidades: [],
+    entidades: [],
     camposTabla: [
-      { key: 'buid', label: 'BUID' },
-      { key: 'buName', label: 'buName' },
-      { key: 'buLocationID', label: 'buLocationID' },
-      { key: 'buStatus', label: 'buStatus' },
-      { key: 'buEffectiveStartDate', label: 'buEffectiveStartDate' },
-      { key: 'buEffectiveEndDate', label: 'buEffectiveEndDate' },
+      { key: 'lempid', label: 'lempId' },
+      { key: 'lempName', label: 'lempName' },      
+      { key: 'lempStatus', label: 'lempStatus' },
+      { key: 'lempEffectiveStartDate', label: 'lempEffectiveStartDate' },
+      { key: 'lempEffectiveEndDate', label: 'lempEffectiveEndDate' },
     ],    
     mostrarFilasSinDatos: false,
     paginaActual: 1,
-    totalUnidades: 0,
+    totalEntidades: 0,
   };
 },
 computed: {
-  unidadesFiltrados() {
+  entidadesFiltrados() {
     // Filtrar departamentos según el estado del checkbox
-    let unidadesFiltrados = this.mostrarFilasSinDatos ? this.unidades.filter(unidad => {
+    let entidadesFiltrados = this.mostrarFilasSinDatos ? this.entidades.filter(entidad => {
       // Verificar si alguna de las propiedades está vacía o es nula
-      return Object.values(unidad).some(valor => valor === '' || valor === null);
-    }) : this.unidades;
+      return Object.values(entidad).some(valor => valor === '' || valor === null);
+    }) : this.entidades;
 
     // Aplicar paginación
     const inicio = (this.paginaActual - 1) * 10;
     const fin = this.paginaActual * 10;
-    return unidadesFiltrados.slice(inicio, fin);
+    return entidadesFiltrados.slice(inicio, fin);
   },
 },
 mounted() {
-  this.obtenerUnidades();
+  this.obtenerEntidades();
 },
 methods: {
-  async obtenerUnidades() {
-    const data = await Estado.ObtenerUnidades();
+  async obtenerEntidades() {
+    const data = await Estado.ObtenerEntidades();
     if (data) {
-        console.log('Unidades de Negocio obtenidas:', data);
-      this.unidades = data;
-      this.totalUnidades = data.length;
+        console.log('Entidades legales obtenidas:', data);
+      this.entidades = data;
+      this.totalEntidades = data.length;
     }
   },
   debeAgregarDato(item, columna) {
