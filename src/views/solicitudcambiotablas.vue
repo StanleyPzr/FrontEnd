@@ -15,7 +15,7 @@
               <b-form-input v-model="RelacionTabla" placeholder="Relacion con otra tabla"></b-form-input>
             </b-form-group>
             <b-form-group label="Vinculación etiqueta XML">
-              <b-form-input v-model="EtiquetaXML" placeholder="Vinculación etiqueta XML"></b-form-input>
+              <b-form-input v-model="EtiquetaXML" placeholder="Vinculación etiqueta XML </etiqueta>"></b-form-input>
             </b-form-group>
             <div class="d-flex justify-content-end">
               <b-button type="submit" class="ml-2" variant="success">Enviar</b-button>
